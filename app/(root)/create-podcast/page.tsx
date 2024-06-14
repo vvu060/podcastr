@@ -31,7 +31,6 @@ import GeneratePodcast from '@/components/GeneratePodcast';
 import GenerateThumbnail from '@/components/GenerateThumbnail';
 import { Loader } from 'lucide-react';
 import { Id } from '@/convex/_generated/dataModel';
-import { VoiceType } from '@/types';
 
 const formSchema = z.object({
   podcastTitle: z.string().min(2),
@@ -51,7 +50,7 @@ export const CreatePodcast = () => {
   const [audioUrl, setAudioUrl] = useState('');
   const [audioDuration, setAudioDuration] = useState(0);
 
-  const [voiceType, setVoiceType] = useState<VoiceType>('alloy');
+  const [voiceType, setVoiceType] = useState(null);
   const [voicePrompt, setVoicePrompt] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -93,7 +92,7 @@ export const CreatePodcast = () => {
                     <Input
                       placeholder='Demo Podcast'
                       {...field}
-                      className='input-class focus-visible:ring-orange-1'
+                      className='input-class focus-visible:ring-offset-orange-1'
                     />
                   </FormControl>
                   <FormMessage className='text-white-1' />
@@ -108,7 +107,7 @@ export const CreatePodcast = () => {
               <Select onValueChange={(value) => setVoiceType(value)}>
                 <SelectTrigger
                   className={cn(
-                    'text-16 w-full border-none bg-black-1 text-gray-1'
+                    'text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1'
                   )}
                 >
                   <SelectValue
@@ -149,7 +148,7 @@ export const CreatePodcast = () => {
                     <Textarea
                       placeholder='Write a short podcast description'
                       {...field}
-                      className='input-class focus-visible:ring-orange-1'
+                      className='input-class focus-visible:ring-offset-orange-1'
                     />
                   </FormControl>
                   <FormMessage className='text-white-1' />
