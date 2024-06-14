@@ -31,6 +31,7 @@ import GeneratePodcast from '@/components/GeneratePodcast';
 import GenerateThumbnail from '@/components/GenerateThumbnail';
 import { Loader } from 'lucide-react';
 import { Id } from '@/convex/_generated/dataModel';
+import { VoiceType } from '@/types';
 
 const formSchema = z.object({
   podcastTitle: z.string().min(2),
@@ -50,7 +51,7 @@ export const CreatePodcast = () => {
   const [audioUrl, setAudioUrl] = useState('');
   const [audioDuration, setAudioDuration] = useState(0);
 
-  const [voiceType, setVoiceType] = useState<string | null>(null);
+  const [voiceType, setVoiceType] = useState<VoiceType>('alloy');
   const [voicePrompt, setVoicePrompt] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -158,7 +159,15 @@ export const CreatePodcast = () => {
           </div>
 
           <div className='flex flex-col pt-10'>
-            <GeneratePodcast />
+            <GeneratePodcast
+              setAudioStorageId={setAudioStorageId}
+              setAudio={setAudioUrl}
+              voiceType={voiceType}
+              audio={audioUrl}
+              voicePrompt={voicePrompt}
+              setVoicePrompt={setVoicePrompt}
+              setAudioDuration={setAudioDuration}
+            />
             <GenerateThumbnail />
             <div className='mt-10 w-full'>
               <Button
